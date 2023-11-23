@@ -47,6 +47,20 @@ public class OrderService {
         order.setUsers(appUser);
         order.setEvent(event);
         orderRepository.save(order);
+        int excount=eventRepository.findById(order.getEvent().getId()).get().getSoldTickets();
+        Event event1=eventRepository.findById(order.getEvent().getId()).orElseThrow();
+        event1.setId(event1.getId());
+        event1.setName(event1.getName());
+        event1.setOrder(event1.getOrder());
+        event1.setVenue(event1.getVenue());
+        event1.setCategory(event1.getCategory());
+        event1.setDate(event1.getDate());
+        event1.setAvailableTickets(event1.getAvailableTickets());
+        event1.setHost(event1.getHost());
+        event1.setDescription(event1.getDescription());
+        event1.setPrice(event1.getPrice());
+        event1.setSoldTickets(order.getCount()+excount);
+        eventRepository.save(event1);
         return order;
     }
 }

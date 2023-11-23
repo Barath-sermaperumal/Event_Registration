@@ -29,12 +29,13 @@ public class EventDto {
     }
 
     public List<ReportResponse> mapToReport(List<Event> eventList) {
-        ReportResponse reportResponse=new ReportResponse();
         List<ReportResponse> rs=new ArrayList<>();
-        for(int i=0;i< eventList.size();i++){
-            reportResponse.setEventName(eventList.get(i).getName());
-            reportResponse.setLocalDate(eventList.get(i).getDate());
-            reportResponse.setTickets_sold(eventList.get(i).getAvailableTickets());
+        for (Event event : eventList) {
+            ReportResponse reportResponse = new ReportResponse();
+            reportResponse.setEventName(event.getName());
+            reportResponse.setLocalDate(event.getDate());
+            reportResponse.setTickets_sold(event.getSoldTickets());
+            reportResponse.setRevenue(event.getPrice()* event.getSoldTickets());
             rs.add(reportResponse);
         }
         return rs;

@@ -32,6 +32,14 @@ public class AppUser {
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;
 
+    private String email;
+
+    private String phone;
+
+    private String gender;
+
+    private String address;
+
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role roles;

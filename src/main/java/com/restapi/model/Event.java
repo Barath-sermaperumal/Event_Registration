@@ -42,6 +42,8 @@ public class Event {
     @Column(nullable = false)
     private int availableTickets;
 
+    private int soldTickets=0;
+
     @JsonIgnore
     @OneToOne()
     @JoinColumn(name = "categoryId", referencedColumnName = "id")

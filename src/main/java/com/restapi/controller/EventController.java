@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("EventRegistration/API/User/Event")
-@PreAuthorize("hasRole('ROLE_USER')")
 public class EventController {
 
     @Autowired
@@ -31,8 +30,8 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<APIResponse> getAEvent(@PathVariable Long id){
-        Event event= eventService.findById(id);
+    public ResponseEntity<APIResponse> getAEvent(@PathVariable Long id) {
+        Event event = eventService.findById(id);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(event);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
