@@ -1,18 +1,18 @@
 package com.restapi.response;
 
+import com.mysql.cj.exceptions.StreamingNotifiable;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserResponse {
+public class ProfileResponse {
     private long id;
     private String name;
     private String username;
-    private String gender;
     private String email;
     private long phone;
-    private String password;
+    private String gender;
     private String address;
     private String role;
 }

@@ -34,7 +34,7 @@ public class AppUser {
 
     private String email;
 
-    private String phone;
+    private long phone;
 
     private String gender;
 

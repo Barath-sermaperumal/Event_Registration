@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Setter
 public class ReportResponse {
     private String eventName;
-    private LocalDate localDate;
+    private LocalDate date;
     private int tickets_sold;
     private int Revenue;
 }

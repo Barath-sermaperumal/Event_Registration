@@ -24,15 +24,19 @@ public class ProfileService {
         return userRepository.findById(id).orElseThrow(()->new UsernameNotFoundException(String.valueOf(id)));
     }
 
-    public AppUser updateUser(RegisterRequest registerRequest, Long id) {
+    public AppUser updateUser(ProfileRequest profileRequest) {
         AppUser appUser=new AppUser();
-        appUser.setName(registerRequest.getName());
-        appUser.setUsername(registerRequest.getUsername());
-        appUser.setPassword(bCryptPasswordEncoder.encode(registerRequest.getPassword()));
-        appUser.setId(id);
-        appUser.setRoles(userRepository.findById(id).get().getRoles());
-        appUser.setOrder(userRepository.findById(id).get().getOrder());
+        appUser.setName(profileRequest.getName());
+        appUser.setUsername(profileRequest.getUsername());
+        appUser.setEmail(profileRequest.getEmail());
+        appUser.setAddress(profileRequest.getAddress());
+        appUser.setPhone(profileRequest.getPhone());
+        appUser.setGender(profileRequest.getGender());
+        appUser.setPassword(bCryptPasswordEncoder.encode(profileRequest.getPassword()));
+        appUser.setId(profileRequest.getId());
+        appUser.setRoles(userRepository.findById(profileRequest.getId()).get().getRoles());
+        appUser.setOrder(userRepository.findById(profileRequest.getId()).get().getOrder());
         userRepository.save(appUser);
-        return findUser(id);
+        return findUser(profileRequest.getId());
     }
 }

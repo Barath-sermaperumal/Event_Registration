@@ -33,7 +33,7 @@ public class EventDto {
         for (Event event : eventList) {
             ReportResponse reportResponse = new ReportResponse();
             reportResponse.setEventName(event.getName());
-            reportResponse.setLocalDate(event.getDate());
+            reportResponse.setDate(event.getDate());
             reportResponse.setTickets_sold(event.getSoldTickets());
             reportResponse.setRevenue(event.getPrice()* event.getSoldTickets());
             rs.add(reportResponse);

@@ -37,9 +37,10 @@ public class ProfileController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<APIResponse> updateUser(@RequestBody RegisterRequest registerRequest, @PathVariable Long id){
-        AppUser user=profileService.updateUser(registerRequest,id);
+    @PutMapping
+    public ResponseEntity<APIResponse> updateUser(@RequestBody ProfileRequest profileRequest){
+        AppUser user=profileService.updateUser(profileRequest);
+        System.out.println(user.getGender());
         UserResponse userResponse=userDto.mapToUserResponse(user);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(userResponse);

@@ -40,10 +40,13 @@ public class OrderDto {
         List<OrderResponse> rs=new ArrayList<>();
         for(int i=0;i<orderList.size();i++){
             orderResponse.setId(orderList.get(i).getId());
+            orderResponse.setEventName(orderList.get(i).getEvent().getName());
             orderResponse.setUserId(orderList.get(i).getUsers().getId());
             orderResponse.setEventId(orderList.get(i).getEvent().getId());
+            orderResponse.setUserName(orderList.get(i).getUsers().getName());
             orderResponse.setCount(orderList.get(i).getCount());
-            rs.add(orderResponse);
+            orderResponse.setTotalPrice(orderList.get(i).getEvent().getPrice()*orderList.get(i).getCount());
+            orderResponse.setDate(orderList.get(i).getEvent().getDate()); rs.add(orderResponse);
         }
         return rs;
     }

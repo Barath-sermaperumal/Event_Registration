@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -48,4 +50,7 @@ public class UserService {
         return authDto.mapToAuthResponse(appUser);
     }
 
+    public List<AppUser> getAllProfiles() {
+        return userRepository.findAll();
+    }
 }
