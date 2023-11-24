@@ -32,7 +32,7 @@ public class ProfileService {
         appUser.setAddress(profileRequest.getAddress());
         appUser.setPhone(profileRequest.getPhone());
         appUser.setGender(profileRequest.getGender());
-        appUser.setPassword(bCryptPasswordEncoder.encode(profileRequest.getPassword()));
+        appUser.setPassword(userRepository.findById(profileRequest.getId()).get().getPassword());
         appUser.setId(profileRequest.getId());
         appUser.setRoles(userRepository.findById(profileRequest.getId()).get().getRoles());
         appUser.setOrder(userRepository.findById(profileRequest.getId()).get().getOrder());

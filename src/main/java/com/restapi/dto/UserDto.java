@@ -38,6 +38,7 @@ public class UserDto {
             profileResponse.setEmail(user.getEmail());
             profileResponse.setPhone(user.getPhone());
             profileResponse.setUsername(user.getUsername());
+            profileResponse.setPassword(user.getPassword());
             rs.add(profileResponse);
         }
         return rs;

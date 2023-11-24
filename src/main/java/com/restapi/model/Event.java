@@ -52,4 +52,5 @@ public class Event {
     @JsonIgnore
     @OneToMany(mappedBy = "event")
     private List<Order> order;
+
 }

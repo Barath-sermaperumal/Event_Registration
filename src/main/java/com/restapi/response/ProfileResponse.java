@@ -10,6 +10,7 @@ public class ProfileResponse {
     private long id;
     private String name;
     private String username;
+    private String password;
     private String email;
     private long phone;
     private String gender;
