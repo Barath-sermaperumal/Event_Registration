@@ -1,6 +1,8 @@
 package com.restapi.controller;
 
+import com.restapi.dto.EventDto;
 import com.restapi.model.Event;
+import com.restapi.response.EventResponse;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +23,24 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private EventDto eventDto;
+
     @GetMapping
     public ResponseEntity<APIResponse> getAllEvents(){
         List<Event> eventList= eventService.findAll();
+        List<EventResponse> eventResponses=eventDto.mapToEventResponse(eventList);
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(eventList);
+        apiResponse.setData(eventResponses);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<APIResponse> getAEvent(@PathVariable Long id) {
         Event event = eventService.findById(id);
+        EventResponse eventResponse=eventDto.mapToSingleEventResponse(event);
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(event);
+        apiResponse.setData(eventResponse);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

@@ -30,10 +30,9 @@ public class Order {
     private Event event;
 
     private int count;
-//
-//    @ManyToOne()
-//    @JoinColumn(name = "bookeduser_id", referencedColumnName = "id")
-//    private BookedUser bookedUserList;
+
+    @OneToMany(mappedBy = "order")
+    private List<Seat> seat;
 
 }
 

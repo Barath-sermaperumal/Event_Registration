@@ -53,4 +53,7 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private List<Order> order;
 
+    @OneToMany(mappedBy = "event")
+    private List<Seat> seat;
+
 }

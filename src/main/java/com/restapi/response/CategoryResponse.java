@@ -1,6 +1,7 @@
 package com.restapi.response;
 
 import com.restapi.model.Event;
+import com.restapi.request.CEvent;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,6 @@ import java.util.List;
 public class CategoryResponse {
     private Long id;
     private String name;
-    private List<Event> event;
+    private List<CEvent> events;
     private int eventsCount;
 }

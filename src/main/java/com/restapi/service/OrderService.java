@@ -5,10 +5,13 @@ import com.restapi.exception.common.ResourceNotFoundException;
 import com.restapi.model.AppUser;
 import com.restapi.model.Event;
 import com.restapi.model.Order;
+import com.restapi.model.Seat;
 import com.restapi.repository.EventRepository;
 import com.restapi.repository.OrderRepository;
+import com.restapi.repository.SeatRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.OrderRequest;
+import com.restapi.request.SeatRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,9 @@ public class OrderService {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    private SeatRepository seatRepository;
 
     public List<Order> findAll(Long id) {
         System.out.println(orderRepository.findAllForId(id));
@@ -61,6 +67,16 @@ public class OrderService {
         event1.setPrice(event1.getPrice());
         event1.setSoldTickets(order.getCount()+excount);
         eventRepository.save(event1);
+        for(int i=0;i<orderRequest.getBookedSeats().size();i++){
+            SeatRequest seatRequest=new SeatRequest();
+            seatRequest.setOrderid(order.getId());
+            seatRequest.setEventid(event.getId());
+            seatRequest.setUserid(appUser.getId());
+            seatRequest.setSeatnumber(orderRequest.getBookedSeats().get(i).getSeatNumber());
+            seatRequest.setIsbooked(orderRequest.getBookedSeats().get(i).isSeatBooked());
+            Seat bookedseat=orderDto.mapSeatRequestToSeat(seatRequest);
+            seatRepository.save(bookedseat);
+        }
         return order;
     }
 }

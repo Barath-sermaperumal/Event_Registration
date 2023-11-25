@@ -50,6 +50,9 @@ public class AppUser {
     @OneToMany(mappedBy = "users")
     private List<Order> order;
 
+    @OneToMany(mappedBy = "user")
+    private List<Seat> seat;
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
