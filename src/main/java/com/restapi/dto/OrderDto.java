@@ -30,9 +30,13 @@ public class OrderDto {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EventDto eventDto;
+
     public Order mapToOrder(OrderRequest orderRequest){
         Order order=new Order();
         order.setSeat(orderRequest.getBookedSeats());
+        order.setCount(orderRequest.getBookedSeats().size());
         return order;
     }
 
@@ -45,21 +49,25 @@ public class OrderDto {
         orderResponse.setEventName(order.getEvent().getName());
         orderResponse.setCount(order.getCount());
         orderResponse.setDate(order.getEvent().getDate());
+        orderResponse.setBookedSeats(order.getSeat());
+        orderResponse.setTotalPrice(order.getEvent().getPrice());
+        orderResponse.setBookedSeatsString(eventDto.mapToEventSeatResponse(order.getSeat()));
         return orderResponse;
     }
 
     public List<OrderResponse> mapListToOrderResponse(List<Order> orderList) {
         List<OrderResponse> rs=new ArrayList<>();
-        for (Order order : orderList) {
+        for (int i=0;i<orderList.size();i++) {
             OrderResponse orderResponse=new OrderResponse();
-            orderResponse.setId(order.getId());
-            orderResponse.setEventName(order.getEvent().getName());
-            orderResponse.setUserId(order.getUsers().getId());
-            orderResponse.setEventId(order.getEvent().getId());
-            orderResponse.setUserName(order.getUsers().getName());
-            orderResponse.setCount(order.getCount());
-            orderResponse.setTotalPrice(order.getEvent().getPrice() * order.getCount());
-            orderResponse.setDate(order.getEvent().getDate());
+            orderResponse.setId(orderList.get(i).getId());
+            orderResponse.setEventName(orderList.get(i).getEvent().getName());
+            orderResponse.setUserId(orderList.get(i).getUsers().getId());
+            orderResponse.setEventId(orderList.get(i).getEvent().getId());
+            orderResponse.setUserName(orderList.get(i).getUsers().getName());
+            orderResponse.setCount(orderList.get(i).getCount());
+            orderResponse.setTotalPrice(orderList.get(i).getEvent().getPrice() * orderList.get(i).getCount());
+            orderResponse.setDate(orderList.get(i).getEvent().getDate());
+            orderResponse.setBookedSeatsString(eventDto.mapToEventSeatResponse(orderList.get(i).getSeat()));
             rs.add(orderResponse);
         }
         return rs;

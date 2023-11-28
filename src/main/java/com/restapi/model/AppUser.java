@@ -47,6 +47,8 @@ public class AppUser {
     @Column(nullable = false, length = 100)
     private String password;
 
+    private String confirmPassword;
+
     @OneToMany(mappedBy = "users")
     private List<Order> order;
 

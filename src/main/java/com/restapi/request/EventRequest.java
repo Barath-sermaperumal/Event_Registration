@@ -32,5 +32,7 @@ public class EventRequest {
         private int availableTickets;
 
         private Long categoryId;
+
+        private String image;
 }
 

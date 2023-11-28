@@ -39,7 +39,6 @@ public class EventService {
         Category category=categoryRepository.findById(eventRequest.getCategoryId())
                 .orElseThrow(()-> new ResourceNotFoundException("category","category", eventRequest.getCategoryId()));
         event.setCategory(category);
-
         eventRepository.save(event);
         return findAll();
     }

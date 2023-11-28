@@ -21,6 +21,8 @@ public class Category {
     @Column(nullable = false, length = 100)
     private String name;
 
+    private String image;
+
     @OneToMany(mappedBy = "category")
     private List<Event> events;
 }

@@ -13,6 +13,8 @@ public class AuthDto {
         appUser.setUsername(user.getUsername());
         appUser.setName(user.getName());
         appUser.setPassword(user.getPassword());
+        appUser.setEmail(user.getEmail());
+        appUser.setConfirmPassword(user.getConfirmPassword());
         return appUser;
     }
 

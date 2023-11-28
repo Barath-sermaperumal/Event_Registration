@@ -25,6 +25,6 @@ public class EventResponse {
         private int price;
         private int availableTickets;
         private int soldTickets;
-        private String categoryName;
+        private long categoryId;
         private List<String> seats;
 }

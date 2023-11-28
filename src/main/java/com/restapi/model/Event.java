@@ -21,6 +21,8 @@ public class Event {
     @GeneratedValue
     private long id;
 
+    private String image;
+
     @Column(nullable = false, length = 100)
     private String name;
 

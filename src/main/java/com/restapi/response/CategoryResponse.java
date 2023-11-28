@@ -13,5 +13,6 @@ public class CategoryResponse {
     private Long id;
     private String name;
     private List<CEvent> events;
+    private String image;
     private int eventsCount;
 }

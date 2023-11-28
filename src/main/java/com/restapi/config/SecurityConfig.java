@@ -58,6 +58,8 @@ public class SecurityConfig {
                 .permitAll()
                 .antMatchers("/EventRegistration/API/User/Event")
                 .permitAll()
+                .antMatchers("/API/downloadFile/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().httpBasic()

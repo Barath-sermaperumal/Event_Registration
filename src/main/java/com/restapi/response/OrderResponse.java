@@ -1,11 +1,10 @@
 package com.restapi.response;
 
-import com.restapi.model.BookedUser;
+import com.restapi.model.Seat;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,5 +18,7 @@ public class OrderResponse {
     private int count;
     private long totalPrice;
     private LocalDate date;
+    private List<Seat> bookedSeats;
+    private List<String> bookedSeatsString;
 //    private List<BookedUser> bookedUserList;
 }
