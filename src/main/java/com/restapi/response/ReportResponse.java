@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class ReportResponse {
+    private long eventId;
     private String eventName;
     private LocalDate date;
     private int tickets_sold;

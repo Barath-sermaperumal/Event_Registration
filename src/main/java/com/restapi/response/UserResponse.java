@@ -15,4 +15,5 @@ public class UserResponse {
     private String password;
     private String address;
     private String role;
+    private String image;
 }

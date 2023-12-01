@@ -49,6 +49,8 @@ public class AppUser {
 
     private String confirmPassword;
 
+    private String image;
+
     @OneToMany(mappedBy = "users")
     private List<Order> order;
 

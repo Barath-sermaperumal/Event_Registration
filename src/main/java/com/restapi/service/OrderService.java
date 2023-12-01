@@ -79,4 +79,10 @@ public class OrderService {
         }
         return order;
     }
+
+    public Object deleteOrder(long id) {
+        seatRepository.deleteSeats(id);
+        orderRepository.deleteById(id);
+        return findAll();
+    }
 }

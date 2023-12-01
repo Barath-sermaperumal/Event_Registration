@@ -24,6 +24,7 @@ public class UserDto {
         userResponse.setPassword(user.getPassword());
         userResponse.setPhone(user.getPhone());
         userResponse.setRole(user.getRoles().getName());
+        userResponse.setImage(user.getImage());
         return userResponse;
     }
 
