@@ -82,6 +82,7 @@ public class OrderService {
 
     public Object deleteOrder(long id) {
         seatRepository.deleteSeats(id);
+        eventRepository.updateSoldTickets();
         orderRepository.deleteById(id);
         return findAll();
     }

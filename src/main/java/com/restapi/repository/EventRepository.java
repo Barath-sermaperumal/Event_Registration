@@ -11,4 +11,7 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event,Long> {
     @Query("select u from Event u where u.category.id=?1")
     List<Event> findCategory(Long id);
+
+    @Query()
+    void updateSoldTickets();
 }
