@@ -2,6 +2,8 @@ package com.restapi.service;
 
 import com.restapi.exception.common.ResourceNotFoundException;
 import com.restapi.model.AppUser;
+import com.restapi.model.UserDP;
+import com.restapi.repository.DpRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.ProfileRequest;
 import com.restapi.request.RegisterRequest;
@@ -19,6 +21,9 @@ public class ProfileService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private DpRepository dpRepository;
 
     public AppUser findUser(Long id) {
         return userRepository.findById(id).orElseThrow(()->new UsernameNotFoundException(String.valueOf(id)));
@@ -38,5 +43,13 @@ public class ProfileService {
         appUser.setOrder(userRepository.findById(profileRequest.getId()).get().getOrder());
         userRepository.save(appUser);
         return findUser(profileRequest.getId());
+    }
+
+    public UserDP addDp(UserDP dp) {
+        return dpRepository.save(dp);
+    }
+
+    public UserDP findDp(Long id) {
+        return dpRepository.findByUserId(id);
     }
 }

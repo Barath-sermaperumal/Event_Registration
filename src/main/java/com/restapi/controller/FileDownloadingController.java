@@ -58,4 +58,23 @@ public class FileDownloadingController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }
+
+    @GetMapping("/downloadImage/Dp/{id}")
+    public ResponseEntity<Resource> downloadDP(@PathVariable long id) throws IOException {
+
+        File file = imageService.getDp(id);
+
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(file.length())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+    }
 }

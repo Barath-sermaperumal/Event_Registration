@@ -61,4 +61,7 @@ public class AppUser {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    @OneToOne(mappedBy = "user")
+    private UserDP dp;
+
 }

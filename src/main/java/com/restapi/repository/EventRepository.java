@@ -12,6 +12,6 @@ public interface EventRepository extends JpaRepository<Event,Long> {
     @Query("select u from Event u where u.category.id=?1")
     List<Event> findCategory(Long id);
 
-    @Query()
-    void updateSoldTickets();
+//    @Query("update soldTickets=:count from event a where a.id=:id")
+//    void updateSoldTickets(long id,int count);
 }

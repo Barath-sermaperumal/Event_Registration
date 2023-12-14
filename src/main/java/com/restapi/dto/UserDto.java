@@ -1,6 +1,8 @@
 package com.restapi.dto;
 
 import com.restapi.model.AppUser;
+import com.restapi.model.UserDP;
+import com.restapi.response.DpResponse;
 import com.restapi.response.ProfileResponse;
 import com.restapi.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,17 @@ public class UserDto {
             profileResponse.setPhone(user.getPhone());
             profileResponse.setUsername(user.getUsername());
             profileResponse.setPassword(user.getPassword());
+            profileResponse.setAddress(user.getAddress());
             rs.add(profileResponse);
         }
         return rs;
+    }
+
+    public DpResponse mapToDpResponse(UserDP dp) {
+        DpResponse dpResponse=new DpResponse();
+        dpResponse.setUserId(dp.getUser().getId());
+        dpResponse.setId(dp.getId());
+        dpResponse.setImage(dp.getDp());
+        return dpResponse;
     }
 }
