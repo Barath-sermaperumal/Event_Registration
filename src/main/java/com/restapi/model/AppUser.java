@@ -32,10 +32,13 @@ public class AppUser {
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;
 
+    @Column(nullable = false, length = 100)
     private String email;
 
+    @Column(nullable = false, length = 10)
     private long phone;
 
+    @Column(nullable = false, length = 10)
     private String gender;
 
     private String address;
@@ -48,8 +51,6 @@ public class AppUser {
     private String password;
 
     private String confirmPassword;
-
-    private String image;
 
     @OneToMany(mappedBy = "users")
     private List<Order> order;

@@ -12,5 +12,6 @@ public class ReportResponse {
     private String eventName;
     private LocalDate date;
     private int tickets_sold;
+    private int available_tickets;
     private int Revenue;
 }

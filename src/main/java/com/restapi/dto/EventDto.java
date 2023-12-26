@@ -37,6 +37,7 @@ public class EventDto {
             reportResponse.setTickets_sold(event.getSoldTickets());
             reportResponse.setRevenue(event.getPrice()* event.getSoldTickets());
             reportResponse.setEventId(event.getId());
+            reportResponse.setAvailable_tickets(event.getAvailableTickets());
             rs.add(reportResponse);
         }
         return rs;

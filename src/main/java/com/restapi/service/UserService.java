@@ -12,6 +12,7 @@ import com.restapi.request.LoginRequest;
 import com.restapi.request.RegisterRequest;
 import com.restapi.response.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,11 +32,16 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public AuthResponse register(RegisterRequest registerRequest) {
-        AppUser appUser = authDto.mapToAppUser(registerRequest);
-        appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
-        appUser.setRoles(roleRepository.findByName(Role.USER));
-        appUser = userRepository.save(appUser);
-        return authDto.mapToAuthResponse(appUser);
+            AppUser appUser = authDto.mapToAppUser(registerRequest);
+            appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
+            appUser.setRoles(roleRepository.findByName(Role.USER));
+            try{
+                appUser = userRepository.save(appUser);
+            }
+            catch (Exception e){
+                throw new InvalidUserException("User Already Exists");
+            }
+            return authDto.mapToAuthResponse(appUser);
     }
 
     public AuthResponse login(LoginRequest loginRequest) {
@@ -51,6 +57,11 @@ public class UserService {
     }
 
     public List<AppUser> getAllProfiles() {
+        return userRepository.findAll();
+    }
+
+    public List<AppUser> deleteUser(long id) {
+        userRepository.deleteById(id);
         return userRepository.findAll();
     }
 }

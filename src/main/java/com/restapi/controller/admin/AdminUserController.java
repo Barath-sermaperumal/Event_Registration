@@ -37,4 +37,13 @@ public class AdminUserController {
         apiResponse.setData(profileResponses);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<APIResponse> deleteUser(@PathVariable long id) {
+        List<AppUser> users=userService.deleteUser(id);
+        List<ProfileResponse> profileResponses = userDto.mapToProfileResponse(users);
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(profileResponses);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 }

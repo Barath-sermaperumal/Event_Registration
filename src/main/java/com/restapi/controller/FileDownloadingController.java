@@ -1,5 +1,6 @@
-package com.restapi.service;
+package com.restapi.controller;
 
+import com.restapi.service.FileDownloadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;

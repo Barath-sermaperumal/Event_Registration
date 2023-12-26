@@ -2,11 +2,14 @@ package com.restapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restapi.model.Role;
+import com.restapi.service.Encryption.Encoder;
+import com.restapi.service.Encryption.RSAEncryptor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -18,9 +21,10 @@ import java.time.LocalDateTime;
 
 @SpringBootApplication
 @EnableSwagger2
-public class SpringBootRestApiStarterApplication {
 
+public class SpringBootRestApiStarterApplication {
 	public static void main(String[] args) {
+
 		SpringApplication.run(SpringBootRestApiStarterApplication.class, args);
 	}
 

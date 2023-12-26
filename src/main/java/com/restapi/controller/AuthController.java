@@ -4,6 +4,7 @@ import com.restapi.request.LoginRequest;
 import com.restapi.request.RegisterRequest;
 import com.restapi.response.AuthResponse;
 import com.restapi.response.common.APIResponse;
+import com.restapi.service.Encryption.Encoder;
 import com.restapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,13 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private Encoder encoder;
+
     @PostMapping("/login")
     public ResponseEntity<APIResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+        encoder.encoder("password");
+        System.out.println("login");
         AuthResponse loggedInUser = userService.login(loginRequest);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(loggedInUser);
