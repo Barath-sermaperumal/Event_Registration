@@ -7,11 +7,14 @@ import com.restapi.model.Event;
 import com.restapi.repository.CategoryRepository;
 import com.restapi.repository.EventRepository;
 import com.restapi.request.EventRequest;
+import com.restapi.request.FilteredEvents;
 import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -59,5 +62,22 @@ public class EventService {
 
     public List<Event> getReport() {
         return eventRepository.findAll();
+    }
+
+    public List<Event> findTopEvents() {
+        return eventRepository.findAllTopEvents();
+    }
+
+    public List<Event> getFilteredEvents(FilteredEvents events){
+        if(!events.getCheckedCategory().isEmpty() && !events.getCheckedVenue().isEmpty()){
+            return eventRepository.findFilteredEvents(events.getFromDate(),events.getToDate(),events.getMinPrice(),events.getMaxPrice(),events.getCheckedCategory(),events.getCheckedVenue());
+        } else if (events.getCheckedCategory().isEmpty() && events.getCheckedVenue().isEmpty()) {
+            return eventRepository.findByDateBetweenAndPriceBetween(events.getFromDate(),events.getToDate(),events.getMinPrice(),events.getMaxPrice());
+        } else if (events.getCheckedVenue().isEmpty()) {
+            return eventRepository.findFilteredEventsWithoutVenues(events.getFromDate(),events.getToDate(),events.getMinPrice(),events.getMaxPrice(),events.getCheckedCategory());
+        }
+        else {
+            return eventRepository.findByDateBetweenAndPriceBetweenAndIdIn(events.getFromDate(),events.getToDate(),events.getMinPrice(),events.getMaxPrice(),events.getCheckedVenue());
+        }
     }
 }

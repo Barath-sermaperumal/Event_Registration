@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .permitAll()
                 .antMatchers("/EventRegistration/API/User/Category/all")
                 .permitAll()
-                .antMatchers("/EventRegistration/API/User/Event")
+                .antMatchers("/EventRegistration/API/User/Event/Top")
                 .permitAll()
                 .antMatchers("/API/downloadFile/**")
                 .permitAll()

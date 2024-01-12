@@ -2,6 +2,7 @@ package com.restapi.controller;
 
 import com.restapi.dto.EventDto;
 import com.restapi.model.Event;
+import com.restapi.request.FilteredEvents;
 import com.restapi.response.EventResponse;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.EventService;
@@ -35,6 +36,15 @@ public class EventController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/Top")
+    public ResponseEntity<APIResponse> getAllTopEvents(){
+        List<Event> eventList= eventService.findTopEvents();
+        List<EventResponse> eventResponses=eventDto.mapToEventResponse(eventList);
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(eventResponses);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<APIResponse> getAEvent(@PathVariable Long id) {
         Event event = eventService.findById(id);
@@ -43,4 +53,16 @@ public class EventController {
         apiResponse.setData(eventResponse);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @PostMapping("/filteredEvents")
+    public ResponseEntity<APIResponse> getFilteredEvents(@RequestBody FilteredEvents events) {
+        System.out.println("BarathEnteredcontroller");
+        List<Event> event=eventService.getFilteredEvents(events);
+        List<EventResponse> eventResponses=eventDto.mapToEventResponse(event);
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(eventResponses);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+
 }

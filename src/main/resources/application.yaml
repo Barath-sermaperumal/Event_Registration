@@ -1,0 +1,44 @@
+spring:
+
+  profiles:
+    active: dev
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-platform: true
+    show_sql: true
+    hibernate:
+      ddl-auto: update
+
+  mvc:
+    path-match:
+      matching-strategy: ANT_PATH_MATCHER
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: barathcse00@gmail.com
+    password: qqxq stfc ifcm oyzi
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 10000
+          starttls:
+            enable: true
+    debug: true
+
+logging:
+  level:
+    org:
+      springframework.security: TRACE
+
+  file:
+    name: app.log

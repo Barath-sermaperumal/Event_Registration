@@ -45,6 +45,7 @@ public class UserService {
     }
 
     public AuthResponse login(LoginRequest loginRequest) {
+
         AppUser appUser = userRepository
                 .findByUsername(loginRequest.getUsername())
                 .orElseThrow(() -> new InvalidUserException("Invalid user credentials"));
