@@ -7,16 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class Event implements Serializable {
     @Id
     @GeneratedValue
     private long id;
@@ -57,5 +59,24 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private List<Seat> seat;
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Event.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("image='" + image + "'")
+                .add("name='" + name + "'")
+                .add("description='" + description + "'")
+                .add("venue='" + venue + "'")
+                .add("date=" + date)
+                .add("host='" + host + "'")
+                .add("price=" + price)
+                .add("availableTickets=" + availableTickets)
+                .add("soldTickets=" + soldTickets)
+                .add("category=" + category)
+                .add("order=" + order)
+                .add("seat=" + seat)
+                .toString();
+    }
 
 }

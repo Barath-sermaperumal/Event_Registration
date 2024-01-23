@@ -5,10 +5,12 @@ import com.restapi.model.Event;
 import com.restapi.repository.CategoryRepository;
 import com.restapi.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CategoryService {
@@ -19,7 +21,28 @@ public class CategoryService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @Cacheable(value = "Category", key = "'allCategory'")
     public List<Category> findAll() {
+//        String key="Eventor_Categories";
+//        HashOperations<String, Long, List<Category>> hashOperations = redisTemplate.opsForHash();
+//
+//        if (redisTemplate.hasKey(key)) {
+//            Map<Long, List<Category>> cachedEvents = hashOperations.entries(key);
+//            System.out.println("Retrieved from cache: " + cachedEvents.toString());
+//            return cachedEvents.values().stream().flatMap(List::stream).toList();
+//        }
+//
+//        // Store & Retrieve a HashMap
+//            Map<Long, List<Category> > Events = new HashMap<>();
+//            for(int i=0;i<categoryRepository.findAll().size();i++){
+//                Events.computeIfAbsent(categoryRepository.findAll().get(i).getId(), k -> new ArrayList<>()).add(categoryRepository.findAll().get(i));
+//            }
+//            System.out.println("BarathEventsMap"+Events.toString());
+//
+//            hashOperations.putAll(key, Events);
         return categoryRepository.findAll();
     }
 

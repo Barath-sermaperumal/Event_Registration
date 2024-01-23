@@ -1,5 +1,9 @@
 spring:
 
+  redis:
+    host: localhost
+    port: 6379
+
   profiles:
     active: dev
 
@@ -35,10 +39,20 @@ spring:
             enable: true
     debug: true
 
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      write-date-timestamps-as-nanoseconds: false
+
+
 logging:
   level:
     org:
-      springframework.security: TRACE
+      springframework:
+        security: TRACE
+      data:
+        redis: DEBUG
+
 
   file:
     name: app.log
