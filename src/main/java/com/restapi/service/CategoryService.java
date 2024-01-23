@@ -24,7 +24,7 @@ public class CategoryService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Cacheable(value = "Category", key = "'allCategory'")
+//    @Cacheable(value = "Category", key = "'allCategory'")
     public List<Category> findAll() {
 //        String key="Eventor_Categories";
 //        HashOperations<String, Long, List<Category>> hashOperations = redisTemplate.opsForHash();
